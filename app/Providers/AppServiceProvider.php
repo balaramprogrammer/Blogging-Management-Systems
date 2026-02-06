@@ -22,12 +22,15 @@ class AppServiceProvider extends ServiceProvider
     {
         // here add routes file
         
-        Route::middleware('web')->group(
+        Route::middleware('web','user.auth')->prefix('admin')->name('admin.')->group(
             base_path('routes/admin.php')
             );
 
             Route::middleware('web')
             ->group(base_path('routes/user.php'));
+
+            Route::middleware('web')->prefix('api')
+            ->group(base_path('routes/api.php'));
 
     }
 }
