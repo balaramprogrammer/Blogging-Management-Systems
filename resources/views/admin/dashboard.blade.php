@@ -1,81 +1,227 @@
 @extends('admin.layouts.main')
 @section('main')
-      <!-- Content -->
-        <div class="container-fluid p-4">
-
-            <!-- Stats Cards -->
-            <div class="row g-3 mb-4">
-                <div class="col-md-3">
-                    <div class="card shadow-sm text-center">
-                        <div class="card-body">
-                            <i class="bi bi-box fs-2 text-primary"></i>
-                            <h6 class="mt-2">Products</h6>
-                            <h4>150</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card shadow-sm text-center">
-                        <div class="card-body">
-                            <i class="bi bi-cart-check fs-2 text-success"></i>
-                            <h6 class="mt-2">Orders</h6>
-                            <h4>92</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card shadow-sm text-center">
-                        <div class="card-body">
-                            <i class="bi bi-people fs-2 text-warning"></i>
-                            <h6 class="mt-2">Customers</h6>
-                            <h4>540</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card shadow-sm text-center">
-                        <div class="card-body">
-                            <i class="bi bi-currency-rupee fs-2 text-danger"></i>
-                            <h6 class="mt-2">Revenue</h6>
-                            <h4>₹2.4L</h4>
-                        </div>
-                    </div>
-                </div>
+<!-- [ Main Content ] start -->
+      <!-- [ breadcrumb ] start -->
+      <div class="page-header">
+         <div class="page-block">
+            <div class="row align-items-center">
+               <div class="col-md-12">
+                  <div class="page-header-title">
+                     <h5 class="mb-0">Admin Dashboard</h5>
+                  </div>
+               </div>
+               <div class="col-md-12">
+                  <ul class="breadcrumb mb-0">
+                    
+                   
+                     
+                  </ul>
+               </div>
             </div>
-
-            <!-- Graph + Orders -->
-            <div class="row">
-                <div class="col-lg-8 mb-4">
-                    <div class="card shadow-sm">
-                        <div class="card-header fw-bold">Monthly Sales</div>
-                        <div class="card-body">
-                            <canvas id="salesChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="card shadow-sm">
-                        <div class="card-header fw-bold">Recent Orders</div>
-                        <div class="card-body p-0">
-                            <table class="table table-sm mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Status</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td>101</td><td><span class="badge bg-success">Paid</span></td><td>₹1200</td></tr>
-                                    <tr><td>102</td><td><span class="badge bg-warning">Pending</span></td><td>₹850</td></tr>
-                                    <tr><td>103</td><td><span class="badge bg-danger">Cancelled</span></td><td>₹450</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+         </div>
+      </div>
+      <!-- [ breadcrumb ] end -->
+      <!-- [ Main Content ] start -->
+      <div class="row">
+         <!-- [Register-user section] start -->
+         <div class="col-md-12 col-xl-4">
+            <div class="card user-card">
+               <div class="card-body">
+                  <h5 class="m-b-15">📄 Total Post</h5>
+                  <h4 class="f-w-300 mb-3">1205</h4>
+                  <span class="text-muted"
+                     ><label class="badge me-2 bg-brand-color-1 text-white f-12 f-w-400">20%</label>Monthly Increase</span
+                     >
+               </div>
             </div>
-
-        </div>
-    @endsection
+         </div>
+         <!-- [Register-user section] end -->
+         <!-- [Daily-user section] start -->
+         <div class="col-md-6 col-xl-4">
+            <div class="card user-card">
+               <div class="card-body">
+                  <h5 class="f-w-400 m-b-15">👁️ Total Views</h5>
+                  <h4 class="f-w-300 mb-3">467</h4>
+                  <span class="text-muted"
+                     ><label class="badge me-2 bg-brand-color-1 text-white f-12 f-w-400">10%</label>Weekly Increase</span
+                     >
+               </div>
+            </div>
+         </div>
+         <!-- [Daily-user section] end -->
+         <!-- [Premium-user section] start -->
+         <div class="col-md-6 col-xl-4">
+            <div class="card user-card">
+               <div class="card-body">
+                  <h5 class="f-w-400 m-b-15">💬 Total Comments</h5>
+                  <h4 class="f-w-300 mb-3">346</h4>
+                  <span class="text-muted"
+                     ><label class="badge me-2 bg-brand-color-1 text-white f-12 f-w-400">50%</label>Yearly Increase</span
+                     >
+               </div>
+            </div>
+         </div>
+         <!-- [Premium-user section] end -->s
+         <!-- [Active-visitor section] start -->
+         <div class="col-md-6 col-xl-4">
+            <div class="card Active-visitor">
+               <div class="card-body text-center">
+                  <h5 class="mb-3">Active Visitor</h5>
+                  <i class="ti ti-user-bolt f-30 text-success"></i>
+                  <h2 class="f-w-300 mt-3">1,285</h2>
+                  <span class="text-muted">Active Visit On Sites</span>
+                  <div class="progress mt-4 m-b-40">
+                     <div
+                        class="progress-bar bg-brand-color-1"
+                        role="progressbar"
+                        style="width: 75%; height: 7px"
+                        aria-valuenow="75"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        ></div>
+                  </div>
+                  <div class="row card-active">
+                     <div class="col-md-4 col-6">
+                        <h4>52%</h4>
+                        <span class="text-muted">Desktop</span>
+                     </div>
+                     <div class="col-md-4 col-6">
+                        <h4>80%</h4>
+                        <span class="text-muted">Mobile</span>
+                     </div>
+                     <div class="col-md-4 col-12">
+                        <h4>68%</h4>
+                        <span class="text-muted">Tablet</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- [Active-visitor section] end -->
+         <!-- [ age-section] start -->
+         <div class="col-xl-4 col-md-6">
+            <div class="card">
+               <div class="card-header">
+                  <h5>Age</h5>
+               </div>
+               <div class="card-body">
+                  <div id="Stack-age" class="Stackchart" style="height: 220px"></div>
+               </div>
+            </div>
+         </div>
+         <!-- [ age-section] end -->
+         <!-- [ visitor section ] start -->
+         <div class="col-md-12 col-xl-4">
+            <div class="card bg-brand-color-1 visitor">
+               <div class="card-body text-center">
+                  <img class="img-female" src="{{asset('assets/admin/assets/images/widget/user-1.png')}}" alt="visitor-user" />
+                  <h5 class="text-white m-0">TOTAL VISITORS</h5>
+                  <h3 class="text-white m-t-20 f-w-300">235</h3>
+                  <span class="text-white">20% More than last Month</span>
+                  <img class="img-men" src="{{asset('assets/admin/assets/images/widget/user-2.png')}}" alt="visitor-user" />
+               </div>
+            </div>
+            <div class="card">
+               <div class="card-body">
+                  <div class="row">
+                     <div class="col">
+                        <i class="ph ph-shopping-cart align-middle f-30 text-success"></i>
+                        <h6 class="m-t-50 m-b-0">Last week’s orders</h6>
+                     </div>
+                     <div class="col text-end">
+                        <h3 class="text-success f-w-300">589</h3>
+                        <span class="text-muted d-block">New Order</span>
+                        <span class="badge bg-brand-color-1 text-white m-t-20">1434</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- [ visitor section ] end -->
+         <!-- [ statistics multi chart ] start -->
+         <div class="col-xl-8 col-md-12">
+            <div class="card">
+               <div class="card-header">
+                  <h5>Statistics</h5>
+               </div>
+               <div class="card-body pb-0">
+                  <div id="bar-chart2" class="bar-chart2" style="height: 330px"></div>
+               </div>
+            </div>
+         </div>
+         <!-- [ statistics multi chart ] end -->
+         <!-- [ statistics chart ] start -->
+         <div class="col-md-12 col-xl-4">
+            <div class="card bg-primary">
+               <div class="card-header border-0">
+                  <h5 class="text-white">Statistics</h5>
+               </div>
+               <div class="card-body">
+                  <div id="Statistics-sale" class="last-week-sales" style="height: 300px"></div>
+               </div>
+            </div>
+         </div>
+         <!-- [ statistics chart ] end -->
+         <!-- [ Transactions chart ] starts -->
+         <div class="col-md-6 col-xl-4">
+            <div class="card">
+               <div class="card-header">
+                  <h5>Transactions</h5>
+                  <span class="d-block pt-2">Jun 23 - Jul 23</span>
+               </div>
+               <div class="card-body">
+                  <div class="row align-items-center justify-content-center">
+                     <div class="col-6">
+                        <h3 class="f-w-300 mb-0 float-start">$ 59,48</h3>
+                     </div>
+                     <div class="col-6">
+                        <div id="transactions" class="float-end" style="height: 90px; width: 80px; margin: 0 auto"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6 col-xl-4">
+            <div class="card">
+               <div class="card-header">
+                  <h5>Transactions</h5>
+                  <span class="d-block pt-2">June - July</span>
+               </div>
+               <div class="card-body">
+                  <div class="row">
+                     <div class="col-6">
+                        <div id="transactions1" style="height: 45px; width: 80px; margin: 0 auto"></div>
+                        <h3 class="f-w-300 pt-3 mb-0 text-center">$ 80,48</h3>
+                     </div>
+                     <div class="col-6">
+                        <div id="transactions2" style="height: 45px; width: 80px; margin: 0 auto"></div>
+                        <h3 class="f-w-300 pt-3 mb-0 text-center">$ 40,27</h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-12 col-xl-4">
+            <div class="card">
+               <div class="card-header">
+                  <h5>Transactions</h5>
+                  <span class="d-block pt-2">Jun 23 - Jul 23</span>
+               </div>
+               <div class="card-body">
+                  <div class="row align-items-center justify-content-center">
+                     <div class="col-6">
+                        <div id="transactions3" class="float-start" style="height: 90px; width: 80px; margin: 0 auto"></div>
+                     </div>
+                     <div class="col-6">
+                        <h3 class="f-w-300 mb-0 float-end">$ 59,48</h3>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- [ Transactions chart ] end -->
+      </div>
+      <!-- [ Main Content ] end -->
+   
+<!-- [ Main Content ] end -->
+@endsection

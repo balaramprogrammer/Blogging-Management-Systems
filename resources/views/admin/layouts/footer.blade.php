@@ -1,48 +1,530 @@
+<footer class="pc-footer">
+   <div class="footer-wrapper container-fluid">
+      <div class="row">
+         <div class="col my-1">
+            <p class="m-0">Admindek by <a href="https://dashboardpack.com/" target="_blank">DashboardPack</a></p>
+         </div>
+         <div class="col-md-auto my-1">
+            <ul class="list-inline footer-link mb-0">
+               <li class="list-inline-item"><a href="https://demo.dashboardpack.com/admindek-html/index.html">Home</a></li>
+               <li class="list-inline-item"
+                  ><a href="https://dashboardpack.com/docs/" target="_blank">Documentation</a></li
+                  >
+               <li class="list-inline-item"><a href="https://dashboardpack.com/support/" target="_blank">Support</a></li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</footer>
+<div class="pct-c-btn-modern">
+   <button type="button" class="customizer-trigger" data-bs-toggle="offcanvas" data-bs-target="#offcanvas_pc_layout" data-bs-toggle="tooltip" data-bs-placement="left" title="Theme Customizer">
+      <div class="trigger-icon">
+         <i class="ph ph-palette"></i>
+      </div>
+      <div class="trigger-text">Customize</div>
+   </button>
+</div>
+<div class="offcanvas border-0 pct-offcanvas-modern offcanvas-end" tabindex="-1" id="offcanvas_pc_layout">
+   <div class="customizer-header">
+      <div class="header-content">
+         <div class="header-icon">
+            <i class="ph ph-paint-brush"></i>
+         </div>
+         <div class="header-info">
+            <h5 class="customizer-title">Theme Customizer</h5>
+            <p class="customizer-subtitle">Personalize your experience</p>
+         </div>
+      </div>
+      <div class="header-actions">
+         <button type="button" class="btn-reset" id="layoutreset" data-bs-toggle="tooltip" title="Reset to defaults">
+         <i class="ph ph-arrow-clockwise"></i>
+         </button>
+         <button type="button" class="btn-close-modern" data-bs-dismiss="offcanvas" aria-label="Close">
+         <i class="ph ph-x"></i>
+         </button>
+      </div>
+   </div>
+   <div class="customizer-search">
+      <div class="search-container">
+         <i class="ph ph-magnifying-glass search-icon"></i>
+         <input type="text" class="search-input" placeholder="Search settings..." id="customizer-search">
+      </div>
+   </div>
+   <div class="quick-theme-toggle">
+      <div class="quick-toggle-header">
+         <h6 class="toggle-title">Theme Mode</h6>
+         <p class="toggle-subtitle">Quick switch between themes</p>
+      </div>
+      <div class="theme-mode-switcher">
+         <button class="theme-mode-btn active" data-mode="light" onclick="layout_change('light');" data-bs-toggle="tooltip" title="Light Mode">
+         <i class="ph ph-sun"></i>
+         <span>Light</span>
+         </button>
+         <button class="theme-mode-btn" data-mode="dark" onclick="layout_change('dark');" data-bs-toggle="tooltip" title="Dark Mode">
+         <i class="ph ph-moon"></i>
+         <span>Dark</span>
+         </button>
+      </div>
+   </div>
+   <div class="customizer-navigation">
+      <div class="nav-pills-modern" id="customizer-nav" role="tablist">
+         <button class="nav-pill active" id="layout-tab" data-bs-toggle="pill" data-bs-target="#layout-panel" type="button" role="tab" aria-controls="layout-panel" aria-selected="true">
+         <i class="ph ph-layout"></i>
+         <span>Layout</span>
+         </button>
+         <button class="nav-pill" id="colors-tab" data-bs-toggle="pill" data-bs-target="#colors-panel" type="button" role="tab" aria-controls="colors-panel" aria-selected="false">
+         <i class="ph ph-palette"></i>
+         <span>Colors</span>
+         </button>
+         <button class="nav-pill" id="advanced-tab" data-bs-toggle="pill" data-bs-target="#advanced-panel" type="button" role="tab" aria-controls="advanced-panel" aria-selected="false">
+         <i class="ph ph-gear-six"></i>
+         <span>Advanced</span>
+         </button>
+      </div>
+   </div>
+   <div class="customizer-content">
+      <div class="tab-content-modern" id="customizer-content">
+         <div class="tab-pane-modern fade show active" id="layout-panel" role="tabpanel" aria-labelledby="layout-tab" tabindex="0">
+            <div class="settings-group">
+               <div class="group-header">
+                  <h6 class="group-title">Sidebar Configuration</h6>
+                  <p class="group-description">Customize your sidebar appearance</p>
+               </div>
+               <div class="setting-item">
+                  <div class="setting-info">
+                     <label class="setting-label">Sidebar Theme</label>
+                     <span class="setting-help">Choose between light and dark sidebar</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="toggle-group">
+                        <button class="toggle-option" data-value="true" onclick="layout_theme_sidebar_change('true');" data-bs-toggle="tooltip" title="Light Sidebar">
+                        <i class="ph ph-sun"></i>
+                        <span>Light</span>
+                        </button>
+                        <button class="toggle-option active" data-value="false" onclick="layout_theme_sidebar_change('false');" data-bs-toggle="tooltip" title="Dark Sidebar">
+                        <i class="ph ph-moon"></i>
+                        <span>Dark</span>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               <div class="setting-item">
+                  <div class="setting-info">
+                     <label class="setting-label">Sidebar Icons</label>
+                     <span class="setting-help">Show or hide navigation icons</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="toggle-group sidebar-icons">
+                        <button class="toggle-option active" data-value="true" onclick="layout_sidebar_icons_change('true');" data-bs-toggle="tooltip" title="Show Icons">
+                        <i class="ph ph-squares-four"></i>
+                        <span>Show</span>
+                        </button>
+                        <button class="toggle-option" data-value="false" onclick="layout_sidebar_icons_change('false');" data-bs-toggle="tooltip" title="Hide Icons">
+                        <i class="ph ph-minus-square"></i>
+                        <span>Hide</span>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               <div class="setting-item">
+                  <div class="setting-info">
+                     <label class="setting-label">Sidebar Caption</label>
+                     <span class="setting-help">Show or hide navigation captions</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="image-toggle-group">
+                        <button class="image-toggle active" data-value="true" onclick="layout_caption_change('true');" data-bs-toggle="tooltip" title="Show Captions">
+                        <img src="https://demo.dashboardpack.com/admindek-html/assets/images/customizer/caption-on.svg" alt="Caption On" class="toggle-preview">
+                        <span class="toggle-label">Show</span>
+                        </button>
+                        <button class="image-toggle" data-value="false" onclick="layout_caption_change('false');" data-bs-toggle="tooltip" title="Hide Captions">
+                        <img src="https://demo.dashboardpack.com/admindek-html/assets/images/customizer/caption-off.svg" alt="Caption Off" class="toggle-preview">
+                        <span class="toggle-label">Hide</span>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               <div class="setting-item pc-rtl">
+                  <div class="setting-info">
+                     <label class="setting-label">Text Direction</label>
+                     <span class="setting-help">Left-to-right or right-to-left layout</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="image-toggle-group">
+                        <button class="image-toggle active" data-value="false" onclick="layout_rtl_change('false');" data-bs-toggle="tooltip" title="Left to Right">
+                        <img src="https://demo.dashboardpack.com/admindek-html/assets/images/customizer/ltr.svg" alt="LTR" class="toggle-preview">
+                        <span class="toggle-label">LTR</span>
+                        </button>
+                        <button class="image-toggle" data-value="true" onclick="layout_rtl_change('true');" data-bs-toggle="tooltip" title="Right to Left">
+                        <img src="https://demo.dashboardpack.com/admindek-html/assets/images/customizer/rtl.svg" alt="RTL" class="toggle-preview">
+                        <span class="toggle-label">RTL</span>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               <div class="setting-item pc-box-width">
+                  <div class="setting-info">
+                     <label class="setting-label">Layout Width</label>
+                     <span class="setting-help">Container width configuration</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="image-toggle-group">
+                        <button class="image-toggle active" data-value="false" onclick="change_box_container('false')" data-bs-toggle="tooltip" title="Full Width Layout">
+                        <img src="https://demo.dashboardpack.com/admindek-html/assets/images/customizer/full.svg" alt="Full Width" class="toggle-preview">
+                        <span class="toggle-label">Full</span>
+                        </button>
+                        <button class="image-toggle" data-value="true" onclick="change_box_container('true')" data-bs-toggle="tooltip" title="Fixed Width Layout">
+                        <img src="https://demo.dashboardpack.com/admindek-html/assets/images/customizer/fixed.svg" alt="Fixed Width" class="toggle-preview">
+                        <span class="toggle-label">Fixed</span>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="tab-pane-modern fade" id="colors-panel" role="tabpanel" aria-labelledby="colors-tab" tabindex="0">
+            <div class="settings-group">
+               <div class="group-header">
+                  <h6 class="group-title">Theme Colors</h6>
+                  <p class="group-description">Customize your color scheme</p>
+               </div>
+               <div class="setting-item">
+                  <div class="setting-info">
+                     <label class="setting-label">Primary Color</label>
+                     <span class="setting-help">Choose your main brand color</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="color-palette preset-color">
+                        <button class="color-swatch-small active" data-bs-toggle="tooltip" title="Ocean Blue" data-value="preset-1">
+                        <span class="color-preview-small" style="background: #4680ff;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Royal Purple" data-value="preset-2">
+                        <span class="color-preview-small" style="background: #7c4dff;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Rose Pink" data-value="preset-3">
+                        <span class="color-preview-small" style="background: #e91e63;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Crimson Red" data-value="preset-4">
+                        <span class="color-preview-small" style="background: #dc2626;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Vibrant Orange" data-value="preset-5">
+                        <span class="color-preview-small" style="background: #ff9800;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Golden Yellow" data-value="preset-6">
+                        <span class="color-preview-small" style="background: #ffd54f;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Forest Green" data-value="preset-7">
+                        <span class="color-preview-small" style="background: #4caf50;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Aqua Cyan" data-value="preset-8">
+                        <span class="color-preview-small" style="background: #00bcd4;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                     </div>
+                     <button class="reset-color-btn" data-target="preset-color" data-bs-toggle="tooltip" title="Reset to default">
+                     <i class="ph ph-arrow-clockwise"></i>
+                     <span>Reset to Default</span>
+                     </button>
+                  </div>
+               </div>
+               <div class="setting-item">
+                  <div class="setting-info">
+                     <label class="setting-label">Header Theme</label>
+                     <span class="setting-help">Customize header background color</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="color-palette header-color">
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Ocean Blue" data-value="preset-1">
+                        <span class="color-preview-small" style="background: #4680ff;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Royal Purple" data-value="preset-2">
+                        <span class="color-preview-small" style="background: #7c4dff;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Rose Pink" data-value="preset-3">
+                        <span class="color-preview-small" style="background: #e91e63;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Crimson Red" data-value="preset-4">
+                        <span class="color-preview-small" style="background: #dc2626;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Vibrant Orange" data-value="preset-5">
+                        <span class="color-preview-small" style="background: #ff9800;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Golden Yellow" data-value="preset-6">
+                        <span class="color-preview-small" style="background: #ffd54f;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Forest Green" data-value="preset-7">
+                        <span class="color-preview-small" style="background: #4caf50;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Aqua Cyan" data-value="preset-8">
+                        <span class="color-preview-small" style="background: #00bcd4;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                     </div>
+                     <button class="reset-color-btn" data-target="header-color" data-bs-toggle="tooltip" title="Reset to default">
+                     <i class="ph ph-arrow-clockwise"></i>
+                     <span>Reset to Default</span>
+                     </button>
+                  </div>
+               </div>
+               <div class="setting-item">
+                  <div class="setting-info">
+                     <label class="setting-label">Navbar Theme</label>
+                     <span class="setting-help">Customize navigation bar colors</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="color-palette navbar-color">
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Ocean Blue" data-value="preset-1">
+                        <span class="color-preview-small" style="background: #4680ff;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Royal Purple" data-value="preset-2">
+                        <span class="color-preview-small" style="background: #7c4dff;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Rose Pink" data-value="preset-3">
+                        <span class="color-preview-small" style="background: #e91e63;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Crimson Red" data-value="preset-4">
+                        <span class="color-preview-small" style="background: #dc2626;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Vibrant Orange" data-value="preset-5">
+                        <span class="color-preview-small" style="background: #ff9800;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Golden Yellow" data-value="preset-6">
+                        <span class="color-preview-small" style="background: #ffd54f;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Forest Green" data-value="preset-7">
+                        <span class="color-preview-small" style="background: #4caf50;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Aqua Cyan" data-value="preset-8">
+                        <span class="color-preview-small" style="background: #00bcd4;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                     </div>
+                     <button class="reset-color-btn" data-target="navbar-color" data-bs-toggle="tooltip" title="Reset to default">
+                     <i class="ph ph-arrow-clockwise"></i>
+                     <span>Reset to Default</span>
+                     </button>
+                  </div>
+               </div>
+               <div class="setting-item">
+                  <div class="setting-info">
+                     <label class="setting-label">Logo Theme</label>
+                     <span class="setting-help">Brand logo area customization</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="color-palette logo-color">
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Ocean Blue" data-value="preset-1">
+                        <span class="color-preview-small" style="background: #4680ff;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Royal Purple" data-value="preset-2">
+                        <span class="color-preview-small" style="background: #7c4dff;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Rose Pink" data-value="preset-3">
+                        <span class="color-preview-small" style="background: #e91e63;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Crimson Red" data-value="preset-4">
+                        <span class="color-preview-small" style="background: #dc2626;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Vibrant Orange" data-value="preset-5">
+                        <span class="color-preview-small" style="background: #ff9800;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Golden Yellow" data-value="preset-6">
+                        <span class="color-preview-small" style="background: #ffd54f;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Forest Green" data-value="preset-7">
+                        <span class="color-preview-small" style="background: #4caf50;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Aqua Cyan" data-value="preset-8">
+                        <span class="color-preview-small" style="background: #00bcd4;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                     </div>
+                     <button class="reset-color-btn" data-target="logo-color" data-bs-toggle="tooltip" title="Reset to default">
+                     <i class="ph ph-arrow-clockwise"></i>
+                     <span>Reset to Default</span>
+                     </button>
+                  </div>
+               </div>
+               <div class="setting-item">
+                  <div class="setting-info">
+                     <label class="setting-label">Caption Colors</label>
+                     <span class="setting-help">Navigation caption text colors</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="color-palette caption-color">
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Ocean Blue" data-value="preset-1">
+                        <span class="color-preview-small" style="background: #4680ff;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Royal Purple" data-value="preset-2">
+                        <span class="color-preview-small" style="background: #7c4dff;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Rose Pink" data-value="preset-3">
+                        <span class="color-preview-small" style="background: #e91e63;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Crimson Red" data-value="preset-4">
+                        <span class="color-preview-small" style="background: #dc2626;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Vibrant Orange" data-value="preset-5">
+                        <span class="color-preview-small" style="background: #ff9800;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Golden Yellow" data-value="preset-6">
+                        <span class="color-preview-small" style="background: #ffd54f;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Forest Green" data-value="preset-7">
+                        <span class="color-preview-small" style="background: #4caf50;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                        <button class="color-swatch-small" data-bs-toggle="tooltip" title="Aqua Cyan" data-value="preset-8">
+                        <span class="color-preview-small" style="background: #00bcd4;"></span>
+                        <i class="ph ph-check color-check"></i>
+                        </button>
+                     </div>
+                     <button class="reset-color-btn" data-target="caption-color" data-bs-toggle="tooltip" title="Reset to default">
+                     <i class="ph ph-arrow-clockwise"></i>
+                     <span>Reset to Default</span>
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="tab-pane-modern fade" id="advanced-panel" role="tabpanel" aria-labelledby="advanced-tab" tabindex="0">
+            <div class="settings-group">
+               <div class="group-header">
+                  <h6 class="group-title">Advanced Settings</h6>
+                  <p class="group-description">Fine-tune interface details</p>
+               </div>
+               <div class="setting-item">
+                  <div class="setting-info">
+                     <label class="setting-label">Dropdown Menu Icons</label>
+                     <span class="setting-help">Choose icons for expandable menus</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="icon-selector drp-menu-icon">
+                        <button class="icon-option active" data-value="preset-1" data-bs-toggle="tooltip" title="Chevron Right">
+                        <i class="ti ti-chevron-right"></i>
+                        </button>
+                        <button class="icon-option" data-value="preset-2" data-bs-toggle="tooltip" title="Double Chevron">
+                        <i class="ti ti-chevrons-right"></i>
+                        </button>
+                        <button class="icon-option" data-value="preset-3" data-bs-toggle="tooltip" title="Caret Right">
+                        <i class="ti ti-caret-right"></i>
+                        </button>
+                        <button class="icon-option" data-value="preset-4" data-bs-toggle="tooltip" title="Plus Circle">
+                        <i class="ti ti-circle-plus"></i>
+                        </button>
+                        <button class="icon-option" data-value="preset-5" data-bs-toggle="tooltip" title="Plus">
+                        <i class="ti ti-plus"></i>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+               <div class="setting-item">
+                  <div class="setting-info">
+                     <label class="setting-label">Link Indicators</label>
+                     <span class="setting-help">Icons for menu link items</span>
+                  </div>
+                  <div class="setting-control">
+                     <div class="icon-selector drp-menu-link-icon">
+                        <button class="icon-option active" data-value="preset-1" data-bs-toggle="tooltip" title="No Icon">
+                        <span class="no-icon">None</span>
+                        </button>
+                        <button class="icon-option" data-value="preset-2" data-bs-toggle="tooltip" title="Arrow Right">
+                        <i class="ti ti-arrow-narrow-right"></i>
+                        </button>
+                        <button class="icon-option" data-value="preset-3" data-bs-toggle="tooltip" title="Chevron Right">
+                        <i class="ti ti-chevron-right"></i>
+                        </button>
+                        <button class="icon-option" data-value="preset-4" data-bs-toggle="tooltip" title="Double Chevron">
+                        <i class="ti ti-chevrons-right"></i>
+                        </button>
+                        <button class="icon-option" data-value="preset-5" data-bs-toggle="tooltip" title="Corner Down">
+                        <i class="ti ti-corner-down-right"></i>
+                        </button>
+                        <button class="icon-option" data-value="preset-6" data-bs-toggle="tooltip" title="Dash">
+                        <i class="ti ti-minus"></i>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 </div>
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- [Page Specific JS] start -->
+{{-- <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}"></script><script src="{{asset('assets/admin/assets/js/plugins/apexcharts.min.js')}}"></script> --}}
+<!-- custom widget js -->
+<script src="{{asset('assets/admin/assets/js/widgets/Stack-age.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/widgets/bar-chart2.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/widgets/Statistics-sale.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/widgets/transactions.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/widgets/transactions1-2.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/widgets/transactions3.js')}}"></script>
+<!-- [Page Specific JS] end -->
+<!-- Required JS -->
+<script src="{{asset('assets/admin/assets/js/plugins/popper.min.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/plugins/simplebar.min.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/plugins/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/plugins/i18next.min.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/plugins/i18nextHttpBackend.min.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/script.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/theme.js')}}"></script>
+<script src="{{asset('assets/admin/assets/js/multi-lang.js')}}"></script>
+<!-- Theme Configuration Scripts (hardcoded based on vite.config.js values) -->
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-
-    const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.getElementById('toggleBtn');
-    const closeBtn = document.getElementById('closeSidebar');
-    const overlay = document.getElementById('overlay');
-    const mainContent = document.querySelector('.main-content');
-
-    function isMobile() {
-        return window.innerWidth <= 991;
-    }
-
-    toggleBtn.addEventListener('click', function () {
-        if (isMobile()) {
-            // Mobile: slide
-            sidebar.classList.toggle('show');
-            overlay.classList.toggle('show');
-        } else {
-            // Desktop: collapse
-            sidebar.classList.toggle('collapsed');
-            mainContent.classList.toggle('full');
-        }
-    });
-
-    // Close button (mobile)
-    closeBtn.addEventListener('click', function () {
-        sidebar.classList.remove('show');
-        overlay.classList.remove('show');
-    });
-
-    // Overlay click
-    overlay.addEventListener('click', function () {
-        sidebar.classList.remove('show');
-        overlay.classList.remove('show');
-    });
-
-});
+   layout_change('light');
 </script>
-
-
-
+<script>
+   change_box_container('false');
+</script>
+<script>
+   layout_caption_change('true');
+</script>
+<script>
+   layout_rtl_change('false');
+</script>
+<script>
+   preset_change('preset-1');
+</script>
+<script>
+   layout_theme_sidebar_change('false');
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"a6117f2172474edeb039d2a90d541d53","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
+<!-- [Body] end -->
+<!-- Mirrored from demo.dashboardpack.com/admindek-html/dashboard/analytics.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Feb 2026 18:08:43 GMT -->
 </html>

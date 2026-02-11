@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
      public function signing(){
-        return view('signing');
+        return view('website.signing');
     }
     function user_validate(Request $request){
     
@@ -36,6 +36,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/signing')->with('success', 'Logged out successfully');
+        return redirect()->route('signing')->with('success', 'Logged out successfully');
     }
 }

@@ -9,5 +9,11 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class Webcontroller extends Controller
 {
-   
+   public function index(){
+    return view('website.index');
+   }
+
+   public function about(){
+    return view('website.about');
+   }
 }

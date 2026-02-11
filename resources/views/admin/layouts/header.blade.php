@@ -1,159 +1,385 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <!-- [Head] start -->
+
+  
+<!-- Mirrored from demo.dashboardpack.com/admindek-html/dashboard/analytics.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Feb 2026 18:08:41 GMT -->
 <head>
-<meta charset="UTF-8">
-<title>E-commerce Admin Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Analytics Dashboard | Admindek Dashboard Template</title>
+<!-- [Meta] -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
+<meta
+  name="description"
+  content="Admindek - Modern responsive dashboard template built with Bootstrap 5. Features dark/light themes, RTL support, and extensive UI components for admin panels and web applications."
+/>
+<meta
+  name="keywords"
+  content="Admindek - Bootstrap 5 admin template, responsive dashboard, dark mode, RTL support, admin panel, UI components, web application template, modern dashboard"
+/>
+<meta name="author" content="DashboardPack.com" />
+<meta name="theme-color" content="#1e293b" />
+<meta name="color-scheme" content="light dark" />
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- [Open Graph] -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Analytics Dashboard | Admindek Dashboard Template" />
+<meta property="og:description" content="Modern responsive dashboard template built with Bootstrap 5. Features dark/light themes, RTL support, and extensive UI components." />
+<meta property="og:site_name" content="Admindek" />
 
-<!-- Bootstrap Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<!-- [Twitter/X Card] -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Analytics Dashboard | Admindek Dashboard Template" />
+<meta name="twitter:description" content="Modern responsive dashboard template built with Bootstrap 5. Features dark/light themes, RTL support, and extensive UI components." />
 
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- [Favicon] icons -->
+<link rel="icon" href="https://demo.dashboardpack.com/admindek-html/assets/images/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="{{asset('assets/admin/assets/images/apple-touch-icon.png')}}" />
+<link rel="manifest" href="https://demo.dashboardpack.com/admindek-html/assets/images/site.webmanifest" />
+ <!-- [Font] Family -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+<!-- [phosphor Icons] https://phosphoricons.com/ -->
+<link rel="stylesheet" href="{{asset('assets/admin/assets/css/plugins/phosphor-icons.css')}}" />
+<!-- [Tabler Icons] https://tablericons.com -->
+<link rel="stylesheet" href="{{asset('assets/admin/assets/css/plugins/tabler-icons.min.css')}}" />
+<!-- [Template CSS Files] -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{{asset('assets/admin/assets/css/style.css')}}" id="main-style-link" />
+<link rel="stylesheet" href="{{asset('assets/admin/assets/css/style-preset.css')}}" />
+<!-- [Vite Development Scripts] -->
+<!-- Development script removed for production -->
 
-<style>
-body {
-    overflow-x: hidden;
-    background: #f8f9fa;
-}
+  </head>
+  <!-- [Head] end -->
+  <!-- [Body] Start -->
 
-/* ================= TOP NAVBAR ================= */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    z-index: 1030;
-}
-/* ================= SIDEBAR ================= */
-#sidebar {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 250px;
-    height: calc(100vh - 60px);
-    background: #212529;
-    overflow-y: auto;
-    transition: all 0.3s ease;
-    z-index: 1020;
-}
-
-/* ===== DESKTOP COLLAPSE ===== */
-@media (min-width: 992px) {
-    #sidebar.collapsed {
-        width: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-}
-
-/* ===== MOBILE SLIDE ===== */
-@media (max-width: 991px) {
-    #sidebar {
-        left: -250px;
-    }
-    #sidebar.show {
-        left: 0;
-    }
-}
-
-/* ================= OVERLAY ================= */
-#overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1015;
-}
-#overlay.show {
-    display: block;
-}
-.main-content {
-    margin-top: 60px;
-    margin-left: 250px;
-    padding: 20px;
-    transition: margin-left 0.3s ease;
-}
-
-/* DESKTOP WHEN SIDEBAR COLLAPSED */
-@media (min-width: 992px) {
-    .main-content.full {
-        margin-left: 0;
-    }
-}
-
-
-/* MOBILE */
-@media (max-width: 991px) {
-    .main-content {
-        margin-left: 0;
-    }
-}
-
-</style>
-</head>
-
-<body>
-
-<!-- TOP NAVBAR -->
-<nav class="navbar navbar-dark bg-dark px-3 shadow-sm">
-    <button class="btn btn-outline-light" id="toggleBtn">
-        <i class="bi bi-list"></i>
-    </button>
-
-    <span class="fw-semibold text-white ms-2">
-        <i class="bi bi-speedometer2 me-1"></i> Dashboard
-    </span>
-
-    <div class="ms-auto d-flex align-items-center gap-3">
-        <i class="bi bi-bell text-white fs-5"></i>
-        <i class="bi bi-person-circle text-white fs-4"></i>
-    </div>
-</nav>
-
-<!-- SIDEBAR -->
-<div id="sidebar">
-    <ul class="nav flex-column px-2 mt-3">
-
-        <li class="nav-item">
-            <a class="nav-link active" href="{{ route('admin.dashboard') }}">
-                <i class="bi bi-speedometer2 me-2"></i> Dashboard
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.add_product') }}">
-                <i class="bi bi-box-seam me-2"></i> Products
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="bi bi-cart-check me-2"></i> Orders
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="bi bi-people me-2"></i> Customers
-            </a>
-        </li>
-
-        <li class="nav-item mt-3">
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button class="btn btn-danger w-100">
-                    <i class="bi bi-box-arrow-right me-2"></i> Logout
-                </button>
-            </form>
-        </li>
-
-    </ul>
+  <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">
+    <!-- [ Pre-loader ] start -->
+<div class="loader-bg">
+  <div class="loader-track">
+    <div class="loader-fill"></div>
+  </div>
 </div>
-
-
-<div id="overlay"></div>
+<!-- [ Pre-loader ] End -->
+ <!-- [ Sidebar Menu ] start -->
+@include('admin.layouts.sidebar')
+<!-- [ Sidebar Menu ] end -->
+ <!-- [ Header Topbar ] start -->
+<header class="pc-header">
+  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+<div class="me-auto pc-mob-drp">
+  <ul class="list-unstyled">
+    <li class="pc-h-item pc-sidebar-collapse">
+      <a href="#" class="pc-head-link ms-0" id="sidebar-hide">
+        <i class="ph ph-list"></i>
+      </a>
+    </li>
+    <li class="pc-h-item pc-sidebar-popup">
+      <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
+        <i class="ph ph-list"></i>
+      </a>
+    </li>
+    <li class="dropdown pc-h-item">
+      <a
+        class="pc-head-link dropdown-toggle arrow-none m-0 trig-drp-search"
+        data-bs-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="false"
+        aria-expanded="false"
+      >
+        <i class="ph ph-magnifying-glass"></i>
+      </a>
+      <div class="dropdown-menu pc-h-dropdown drp-search">
+        <form class="px-3 py-2">
+          <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . ." />
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- [Mobile Media Block end] -->
+<div class="ms-auto">
+  <ul class="list-unstyled">
+    <li class="dropdown pc-h-item">
+      <a
+        class="pc-head-link dropdown-toggle arrow-none me-0"
+        data-bs-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="false"
+        aria-expanded="false"
+      >
+        <i class="ph ph-sun-dim"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
+        <a href="#!" class="dropdown-item" onclick="layout_change('dark')">
+          <i class="ph ph-moon"></i>
+          <span>Dark</span>
+        </a>
+        <a href="#!" class="dropdown-item" onclick="layout_change('light')">
+          <i class="ph ph-sun"></i>
+          <span>Light</span>
+        </a>
+        <a href="#!" class="dropdown-item" onclick="layout_change_default()">
+          <i class="ph ph-cpu"></i>
+          <span>Default</span>
+        </a>
+      </div>
+    </li>
+    <li class="dropdown pc-h-item d-none d-md-inline-flex">
+      <a
+        class="pc-head-link head-link-primary dropdown-toggle arrow-none me-0"
+        data-bs-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="false"
+        aria-expanded="false"
+      >
+        <i class="ph ph-translate"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end pc-h-dropdown lng-dropdown">
+        <a href="#!" class="dropdown-item" data-lng="en">
+          <span>
+            English
+            <small>(UK)</small>
+          </span>
+        </a>
+        <a href="#!" class="dropdown-item" data-lng="fr">
+          <span>
+            français
+            <small>(French)</small>
+          </span>
+        </a>
+        <a href="#!" class="dropdown-item" data-lng="ro">
+          <span>
+            Română
+            <small>(Romanian)</small>
+          </span>
+        </a>
+        <a href="#!" class="dropdown-item" data-lng="cn">
+          <span>
+            中国人
+            <small>(Chinese)</small>
+          </span>s
+        </a>
+      </div>
+    </li>
+    <li class="dropdown pc-h-item">
+      <a
+        class="pc-head-link dropdown-toggle arrow-none me-0"
+        data-bs-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="false"
+        aria-expanded="false"
+      >
+        <i class="ph ph-diamonds-four"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-user"></i>
+          <span>My Account</span>
+        </a>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-gear"></i>
+          <span>Settings</span>
+        </a>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-lifebuoy"></i>
+          <span>Support</span>
+        </a>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-lock-key"></i>
+          <span>Lock Screen</span>
+        </a>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-power"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </li>
+    <li class="dropdown pc-h-item">
+      <a
+        class="pc-head-link dropdown-toggle arrow-none me-0"
+        data-bs-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="false"
+        aria-expanded="false"
+      >
+        <i class="ph ph-bell"></i>
+        <span class="badge bg-success pc-h-badge">5</span>
+      </a>
+      <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
+        <div class="dropdown-header d-flex align-items-center justify-content-between">
+          <h5 class="m-0">Notifications</h5>
+          <a href="#!" class="btn btn-link btn-sm">Mark all read</a>
+        </div>
+        <div class="dropdown-body text-wrap header-notification-scroll position-relative" style="max-height: calc(100vh - 215px)">
+          <p class="text-span">Today</p>
+          <div class="card bg-transparent mb-2 border-0">
+            <div class="card-body p-3 rounded" style="background: rgba(var(--bs-light-rgb), 0.3); transition: all 0.2s ease;" onmouseover="this.style.background='rgba(var(--bs-primary-rgb), 0.05)'" onmouseout="this.style.background='rgba(var(--bs-light-rgb), 0.3)'">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <div class="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="ph ph-credit-card text-success" style="font-size: 16px;"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <span class="float-end text-sm text-muted">2 min ago</span>
+                  <h5 class="text-body mb-2">Payment Received</h5>
+                  <p class="mb-0">$2,499.00 payment received for Pro Plan subscription from Acme Corp</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card bg-transparent mb-2 border-0">
+            <div class="card-body p-3 rounded" style="background: rgba(var(--bs-light-rgb), 0.3); transition: all 0.2s ease;" onmouseover="this.style.background='rgba(var(--bs-primary-rgb), 0.05)'" onmouseout="this.style.background='rgba(var(--bs-light-rgb), 0.3)'">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="ph ph-users text-primary" style="font-size: 16px;"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <span class="float-end text-sm text-muted">1 hour ago</span>
+                  <h5 class="text-body mb-2">New Team Member</h5>
+                  <p class="mb-0">Sarah Johnson joined your workspace and was assigned to the Marketing team</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card bg-transparent mb-2 border-0">
+            <div class="card-body p-3 rounded" style="background: rgba(var(--bs-light-rgb), 0.3); transition: all 0.2s ease;" onmouseover="this.style.background='rgba(var(--bs-primary-rgb), 0.05)'" onmouseout="this.style.background='rgba(var(--bs-light-rgb), 0.3)'">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <div class="bg-warning bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="ph ph-chart-line text-warning" style="font-size: 16px;"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <span class="float-end text-sm text-muted">3 hours ago</span>
+                  <h5 class="text-body mb-2">Monthly Report Ready</h5>
+                  <p class="mb-0">Your January 2025 analytics report is ready. Revenue up 24% vs last month</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="text-span">Yesterday</p>
+          <div class="card bg-transparent mb-2 border-0">
+            <div class="card-body p-3 rounded" style="background: rgba(var(--bs-light-rgb), 0.3); transition: all 0.2s ease;" onmouseover="this.style.background='rgba(var(--bs-primary-rgb), 0.05)'" onmouseout="this.style.background='rgba(var(--bs-light-rgb), 0.3)'">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <div class="bg-danger bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="ph ph-shield-check text-danger" style="font-size: 16px;"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <span class="float-end text-sm text-muted">18 hours ago</span>
+                  <h5 class="text-body mb-2">Security Alert</h5>
+                  <p class="mb-2">New login detected from San Francisco, CA. If this wasn't you, please secure your account</p>
+                  <button class="btn btn-sm btn-outline-secondary me-2">Ignore</button>
+                  <button class="btn btn-sm btn-danger">Secure Account</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card bg-transparent mb-2 border-0">
+            <div class="card-body p-3 rounded" style="background: rgba(var(--bs-light-rgb), 0.3); transition: all 0.2s ease;" onmouseover="this.style.background='rgba(var(--bs-primary-rgb), 0.05)'" onmouseout="this.style.background='rgba(var(--bs-light-rgb), 0.3)'">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <div class="bg-info bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                    <i class="ph ph-rocket text-info" style="font-size: 16px;"></i>
+                  </div>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <span class="float-end text-sm text-muted">1 day ago</span>
+                  <h5 class="text-body mb-2">Feature Update</h5>
+                  <p class="mb-0">New AI-powered insights are now available in your dashboard. Check out the enhanced analytics</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card bg-transparent mb-2 border-0">
+            <div class="card-body p-3 rounded" style="background: rgba(var(--bs-light-rgb), 0.3); transition: all 0.2s ease;" onmouseover="this.style.background='rgba(var(--bs-primary-rgb), 0.05)'" onmouseout="this.style.background='rgba(var(--bs-light-rgb), 0.3)'">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <img class="img-radius avatar rounded-0" src="https://demo.dashboardpack.com/admindek-html/assets/images/user/avatar-5.svg" alt="Generic placeholder image" />
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <span class="float-end text-sm text-muted">5 hour ago</span>
+                  <h5 class="text-body mb-2">Security</h5>
+                  <p class="mb-0"
+                    >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type</p
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center py-2">
+          <a href="#!" class="link-danger">Clear all Notifications</a>
+        </div>
+      </div>
+    </li>
+    <li class="dropdown pc-h-item header-user-profile">
+      <a
+        class="pc-head-link dropdown-toggle arrow-none me-0"
+        data-bs-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="false"
+        data-bs-auto-close="outside"
+        aria-expanded="false"
+      >
+        <i class="ph ph-user-circle"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end pc-h-dropdown">
+        <div class="dropdown-header">
+          <h6 class="mb-0">John Doe</h6>
+          <small class="text-muted"><a href="https://demo.dashboardpack.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="177d787f79397378725776747a72747865673974787a">[email&#160;protected]</a></small>
+          <span class="badge bg-success-subtle text-success mt-1">Pro Plan</span>
+        </div>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-user-circle"></i>
+          <span>Profile & Settings</span>
+        </a>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-buildings"></i>
+          <span>Workspace Settings</span>
+        </a>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-credit-card"></i>
+          <span>Billing & Usage</span>
+        </a>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-users-three"></i>
+          <span>Team Management</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-headset"></i>
+          <span>Support Center</span>
+        </a>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-keyboard"></i>
+          <span>Keyboard Shortcuts</span>
+        </a>
+        <a href="#!" class="dropdown-item">
+          <i class="ph ph-download"></i>
+          <span>Download Mobile App</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="{{route('logout')}}" class="dropdown-item text-danger">
+          <i class="ph ph-sign-out"></i>
+          <span>Sign Out</span>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>
+ </div>
+</header>
+<!-- [ Header ] end -->
