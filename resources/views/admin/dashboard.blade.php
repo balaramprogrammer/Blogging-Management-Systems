@@ -28,7 +28,7 @@
             <div class="card user-card">
                <div class="card-body">
                   <h5 class="m-b-15">📄 Total Post</h5>
-                  <h4 class="f-w-300 mb-3">1205</h4>
+                  <h4 class="f-w-300 mb-3">{{$totalPosts?? 0}}</h4>
                   <span class="text-muted"
                      ><label class="badge me-2 bg-brand-color-1 text-white f-12 f-w-400">20%</label>Monthly Increase</span
                      >
@@ -41,7 +41,7 @@
             <div class="card user-card">
                <div class="card-body">
                   <h5 class="f-w-400 m-b-15">👁️ Total Views</h5>
-                  <h4 class="f-w-300 mb-3">467</h4>
+                  <h4 class="f-w-300 mb-3">{{$totalViews}}</h4>
                   <span class="text-muted"
                      ><label class="badge me-2 bg-brand-color-1 text-white f-12 f-w-400">10%</label>Weekly Increase</span
                      >
@@ -61,7 +61,7 @@
                </div>
             </div>
          </div>
-         <!-- [Premium-user section] end -->s
+         <!-- [Premium-user section] end -->
          <!-- [Active-visitor section] start -->
          <div class="col-md-6 col-xl-4">
             <div class="card Active-visitor">
@@ -116,7 +116,7 @@
                <div class="card-body text-center">
                   <img class="img-female" src="{{asset('assets/admin/assets/images/widget/user-1.png')}}" alt="visitor-user" />
                   <h5 class="text-white m-0">TOTAL VISITORS</h5>
-                  <h3 class="text-white m-t-20 f-w-300">235</h3>
+                  <h3 class="text-white m-t-20 f-w-300">{{$totalViews?? 0}}</h3>
                   <span class="text-white">20% More than last Month</span>
                   <img class="img-men" src="{{asset('assets/admin/assets/images/widget/user-2.png')}}" alt="visitor-user" />
                </div>

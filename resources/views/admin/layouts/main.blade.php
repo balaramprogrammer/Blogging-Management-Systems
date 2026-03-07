@@ -4,4 +4,5 @@
       @yield('main')
    </div>
 </div>
+ @yield('scripts')
 @include('admin.layouts.footer')

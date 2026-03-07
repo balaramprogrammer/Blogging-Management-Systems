@@ -57,10 +57,17 @@
 						<a href="#" class="left-topbar-item">
 							Sing up
 						</a>
-
-						<a href="{{route('signing')}}" class="left-topbar-item">
-							Log in
-						</a>
+						@auth
+							@if(Auth::user()->role == 'admin')
+								<a href="{{ route('admin.blog.edit') }}" class="left-topbar-item">
+									<i class="bi bi-speedometer2"></i> Go to Dashboard
+								</a>
+							@endif
+						@else
+							<a href="{{ route('signing') }}" class="left-topbar-item">
+								<i class="bi bi-box-arrow-in-right"></i> Log in
+							</a>
+						@endauth
 					</div>
 
 					<div class="right-topbar">
@@ -162,7 +169,7 @@
 
 				<ul class="main-menu-m">
 					<li>
-						<a href="{{route('/')}}">Home</a>
+						<a href="{{route('website.index')}}">Home</a>
 
 						<span class="arrow-main-menu-m">
 							<i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -237,7 +244,7 @@
 						</a>
 
 						<ul class="main-menu">
-								<a href="{{ route('/') }}" style="color: black; font-weight: bold;">Home</a>
+								<a href="{{ route('website.index') }}" style="color: black; font-weight: bold;">Home</a>
 							<li class="mega-menu-item">
 								<a href="category-01.html">News</a>
 

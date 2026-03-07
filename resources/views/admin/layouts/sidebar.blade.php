@@ -11,8 +11,8 @@
             <li class="pc-item pc-caption">
                <label data-i18n="Navigation">Navigation</label>
             </li>
-            <li class="pc-item pc-hasmenu">
-               <a href="#!" class="pc-link">
+            <li class="pc-item ">
+               <a href="{{route('admin.dashboard')}}" class="pc-link">
                <span class="pc-micon">
                <i class="ph ph-house-line"></i>
                </span>
@@ -29,11 +29,11 @@
                <span class="pc-arrow"><i class="ti ti-chevron-right"></i></span>
                </a>
                <ul class="pc-submenu">
-                  <li class="pc-item"><a class="pc-link" href="https://demo.dashboardpack.com/admindek-html/demo/layout-horizontal.html" data-i18n="Create New Post">Create New Post</a></li>
-                  <li class="pc-item"><a class="pc-link" href="https://demo.dashboardpack.com/admindek-html/demo/layout-2.html" data-i18n="Edit Post">Edit Post</a></li>
-                  <li class="pc-item"><a class="pc-link" href="https://demo.dashboardpack.com/admindek-html/demo/layout-3.html" data-i18n="schedule posts">schedule posts</a></li>
-                  <li class="pc-item"><a class="pc-link" href="https://demo.dashboardpack.com/admindek-html/demo/layout-3.html" data-i18n="Publish Posts">Publish Posts</a></li>
-                  <li class="pc-item"><a class="pc-link" href="https://demo.dashboardpack.com/admindek-html/demo/layout-3.html" data-i18n="Draft Posts">Draft Posts</a></li>
+                  <li class="pc-item"><a class="pc-link" href="{{route('admin.blog.create')}}" data-i18n="Create New Post">Create New Post</a></li>
+                  <li class="pc-item"><a class="pc-link" href="{{route('admin.blog.edit')}}" data-i18n="Edit & Draft Post">Edit & Draft Post</a></li>
+                  <li class="pc-item"><a class="pc-link" href="{{route('admin.schedule.posts')}}" data-i18n="schedule posts">schedule posts</a></li>
+                  <li class="pc-item"><a class="pc-link" href="{{route('admin.published.posts')}}" data-i18n="Published Posts">Published Posts</a></li>
+                 
                </ul>
             </li>
             <li class="pc-item pc-hasmenu">
@@ -158,6 +158,17 @@
                   <li class="pc-item"><a class="pc-link" target="_blank" href="https://demo.dashboardpack.com/admindek-html/pages/offline-ui.html" data-i18n="Offline Ui">Offline Ui</a></li>
                </ul>
             </li>
+                       <li class="pc-item">
+            <a href="{{ route('website.index') }}" class="pc-link" target="_self">
+            <span class="pc-micon">
+               <i class="ph ph-globe"></i>
+            </span>
+
+            <span class="pc-mtext">
+               Visit Website
+            </span>
+         </a>
+         </li>
             <li class="pc-item">
                <a href="https://demo.dashboardpack.com/admindek-html/index.html" class="pc-link" target="_blank">
                <span class="pc-micon"> <i class="ph ph-target"></i> </span><span class="pc-mtext" data-i18n="View analytics reports">View analytics reports</span>
