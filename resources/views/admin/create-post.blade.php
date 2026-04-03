@@ -388,8 +388,13 @@ function previewCategoryImage(event){
         output.style.display = "block";
     };
 
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(event.target.files[0]); 
 }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('.pc-sidebar').classList.add('pc-sidebar-hide');
+});
 </script>
 @endsection
 

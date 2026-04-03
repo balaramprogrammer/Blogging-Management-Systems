@@ -30,7 +30,7 @@
                </a>
                <ul class="pc-submenu">
                   <li class="pc-item"><a class="pc-link" href="{{route('admin.blog.create')}}" data-i18n="Create New Post">Create New Post</a></li>
-                  <li class="pc-item"><a class="pc-link" href="{{route('admin.blog.edit')}}" data-i18n="Edit & Draft Post">Edit & Draft Post</a></li>
+                  <li class="pc-item"><a class="pc-link" href="{{route('admin.blog.draft')}}" data-i18n="Edit & Draft Post">Edit & Draft Post</a></li>
                   <li class="pc-item"><a class="pc-link" href="{{route('admin.schedule.posts')}}" data-i18n="schedule posts">schedule posts</a></li>
                   <li class="pc-item"><a class="pc-link" href="{{route('admin.published.posts')}}" data-i18n="Published Posts">Published Posts</a></li>
                  
@@ -45,8 +45,8 @@
                <span class="pc-arrow"><i class="ti ti-chevron-right"></i></span>
                </a>
                <ul class="pc-submenu">
-                  <li class="pc-item"><a class="pc-link" href="" data-i18n="View Category List">View Category List</a></li>
-                  <li class="pc-item"><a class="pc-link" href="" data-i18n="Tag Management">Tag Management</a></li>
+                  <li class="pc-item"><a class="pc-link" href="{{route('admin.category_list')}}" data-i18n="View Category List">View Category List</a></li>
+                  <li class="pc-item"><a class="pc-link" href="{{route('admin.tags_managements')}}" data-i18n="Tag Management">Tag Management</a></li>
                   <li class="pc-item"><a class="pc-link" href="" data-i18n="Comment Moderation  ">Comment Moderation</a></li>
                </ul>
             </li>

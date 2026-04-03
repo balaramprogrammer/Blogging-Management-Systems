@@ -1,20 +1,5 @@
 <footer class="pc-footer">
-   <div class="footer-wrapper container-fluid">
-      <div class="row">
-         <div class="col my-1">
-            <p class="m-0">Admindek by <a href="https://dashboardpack.com/" target="_blank">DashboardPack</a></p>
-         </div>
-         <div class="col-md-auto my-1">
-            <ul class="list-inline footer-link mb-0">
-               <li class="list-inline-item"><a href="https://demo.dashboardpack.com/admindek-html/index.html">Home</a></li>
-               <li class="list-inline-item"
-                  ><a href="https://dashboardpack.com/docs/" target="_blank">Documentation</a></li
-                  >
-               <li class="list-inline-item"><a href="https://dashboardpack.com/support/" target="_blank">Support</a></li>
-            </ul>
-         </div>
-      </div>
-   </div>
+  
 </footer>
 <div class="pct-c-btn-modern">
    <button type="button" class="customizer-trigger" data-bs-toggle="offcanvas" data-bs-target="#offcanvas_pc_layout" data-bs-toggle="tooltip" data-bs-placement="left" title="Theme Customizer">

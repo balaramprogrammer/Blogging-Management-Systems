@@ -68,9 +68,9 @@
 
            
 
-            <p class="text-muted">
+            {{--<p class="text-muted">
                 {!! Str::limit(strip_tags($post->content),100) !!}
-            </p>
+            </p>--}}
      {{-- Scheduled Timer --}}
             @if($post->status == 'scheduled' && $post->published_at)
                 <p class="text-danger">
@@ -85,18 +85,16 @@
                <i class="bi bi-eye"></i>
                {{ $post->views ?? 0 }} Views
                </span>
-               <div class="btn-group">
-                  <a href="{{ route('blog.read',[$post->category->slug, $post->slug]) }}" class="btn btn-sm btn-success">
+                <div class="btn-group">
+                  <a href="{{ route('blog.read', $post->slug) }}" class="btn btn-sm btn-success">
                   <i class="bi bi-book"></i>
                   </a>
-                  <a href="/admin/blog/{{$post->id}}/edit" class="btn btn-sm btn-warning">
+                  <a href="{{ route('admin.blog.edit', $post->id) }}"  class="btn btn-sm btn-warning">
                   <i class="bi bi-pencil"></i>
                   </a>
-                  <button class="btn btn-sm btn-danger deletePost"
-                     data-id="{{$post->id}}">
-                  <i class="bi bi-trash"></i>
+                  <button class="btn btn-sm btn-danger deletePost" data-id="{{ $post->id }}">
+                     <i class="bi bi-trash"></i>
                   </button>
-                  
                </div>
                
             </div>
@@ -132,6 +130,52 @@ document.querySelectorAll('.countdown').forEach(function(el){
 
     },1000);
 
+});
+</script>
+<script>
+document.querySelectorAll('.deletePost').forEach(button => {
+    button.addEventListener('click', function() {
+
+        let postId = this.dataset.id;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This post will be permanently deleted!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // AJAX DELETE request
+                fetch("{{ url('/admin/blog') }}/" + postId, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "Accept": "application/json",
+                    },
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if(data.success){
+                        Swal.fire(
+                            'Deleted!',
+                            'Your post has been deleted.',
+                            'success'
+                        ).then(() => location.reload());
+                    } else {
+                        Swal.fire('Error!', 'Something went wrong!', 'error');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    Swal.fire('Error!', 'Something went wrong!', 'error');
+                });
+            }
+        });
+    });
 });
 </script>
 @endsection

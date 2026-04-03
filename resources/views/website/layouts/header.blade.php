@@ -59,7 +59,7 @@
 						</a>
 						@auth
 							@if(Auth::user()->role == 'admin')
-								<a href="{{ route('admin.blog.edit') }}" class="left-topbar-item">
+								<a href="{{ route('admin.blog.draft') }}" class="left-topbar-item">
 									<i class="bi bi-speedometer2"></i> Go to Dashboard
 								</a>
 							@endif
