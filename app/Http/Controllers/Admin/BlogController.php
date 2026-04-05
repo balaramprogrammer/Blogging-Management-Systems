@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 
 class BlogController extends Controller
 {
@@ -171,7 +172,16 @@ public function category_updated_store(Request $request, $id)
         // status logic
         // $status = $request->status == 'scheduled' ? 'draft' : $request->status;
 
+        // User se tags array milta hai
+            $tags = $request->tags; // ['AI', 'Laravel', 'PHP']
 
+            foreach ($tags as $tagName) {
+                // Check if tag already exists
+                $tag = Tag::firstOrCreate(
+                    ['slug' => Str::slug($tagName)], // unique key
+                    ['name' => $tagName]             // agar new create kare to name set kare
+                );
+            }
         Post::create([
 
             'title' => $request->title,
@@ -184,7 +194,7 @@ public function category_updated_store(Request $request, $id)
             'meta_description' => $request->meta_description,
             'meta_keywords' => $request->meta_keywords,
 
-            'tags' => $request->tags,
+            'blogger_id' => 1,
 
             'status' => $request->status,
 
@@ -194,68 +204,72 @@ public function category_updated_store(Request $request, $id)
         return back()->with('success','Post Added Successfully');
 
     }
-  public function store_updated_post(Request $request, $id)
+
+public function store_updated_post(Request $request, $id)
 {
     $post = Post::findOrFail($id);
 
     $request->validate([
-
         'title' => 'required|string|max:255',
         'category_id' => 'required|exists:categories,id',
         'content' => 'required',
-
         'featured_image' => 'nullable|mimetypes:image/avif,image/jpeg,image/png,image/webp|max:2048',
-
         'meta_title' => 'nullable|string|max:255',
         'meta_description' => 'nullable|string',
         'meta_keywords' => 'nullable|string',
-
-        'tags' => 'nullable|string',
-
+        'tags' => 'nullable|array', // array expected
+        'tags.*' => 'string|max:50', // each tag max 50 char
         'status' => 'required|in:draft,published,scheduled',
-
         'publish_date' => 'nullable|date'
     ]);
-
-    //slug update (only if title changed)
+dd('ok');
+    // 1️⃣ Update slug if title changed
     if ($post->title !== $request->title) {
         $slug = Str::slug($request->title);
-
         if (Post::where('slug', $slug)->where('id', '!=', $id)->exists()) {
-            $slug = $slug . '-' . time();
+            $slug .= '-' . time();
         }
-
         $post->slug = $slug;
     }
 
-    //image update
+    // 2️⃣ Update featured image
     if ($request->hasFile('featured_image')) {
-
-        // old image delete (optional but recommended)
         if ($post->featured_image && file_exists(public_path('post_images/' . $post->featured_image))) {
             unlink(public_path('post_images/' . $post->featured_image));
         }
-
         $imageName = time() . '.' . $request->featured_image->extension();
         $request->featured_image->move(public_path('post_images'), $imageName);
-
         $post->featured_image = $imageName;
     }
 
-    // update fields
-    $post->update([
-        'title' => $request->title,
-        'category_id' => $request->category_id,
-        'content' => $request->content,
+    // 3️⃣ Update other fields
+        $post->title = $request->title;
+        $post->category_id = $request->category_id;
+        $post->content = $request->content;
+        $post->meta_title = $request->meta_title;
+        $post->meta_description = $request->meta_description;
+        $post->meta_keywords = $request->meta_keywords;
+        $post->status = $request->status;
+        $post->published_at = $request->publish_date;
 
-        'meta_title' => $request->meta_title,
-        'meta_description' => $request->meta_description,
-        'meta_keywords' => $request->meta_keywords,
+    $post->save();
 
-        'tags' => $request->tags,
-        'status' => $request->status,
-        'published_at' => $request->publish_date
-    ]);
+    // 4️⃣ Handle tags (many-to-many)
+    if ($request->has('tags')) {
+        $tagIds = [];
+        foreach ($request->tags as $tagName) {
+            $tag = Tag::firstOrCreate(
+                ['slug' => Str::slug($tagName)],
+                ['name' => $tagName]
+            );
+            $tagIds[] = $tag->id;
+        }
+        // Sync tags to pivot table
+        $post->tags()->sync($tagIds);
+    } else {
+        // If no tags provided, detach all
+        $post->tags()->detach();
+    }
 
     return back()->with('success', 'Post Updated Successfully');
 }
@@ -287,7 +301,7 @@ public function category_updated_store(Request $request, $id)
      function published_posts(){
         $posts = Post::with('category')->where('status','published')
                 ->whereHas('category', function ($query) {
-                    $query->where('statis','active');
+                    $query->where('status','active');
                 })
                 ->get();
         
@@ -295,7 +309,7 @@ public function category_updated_store(Request $request, $id)
     }
      function scheduled_posts(){
         $posts = Post::with('category')->where('status','scheduled') ->whereHas('category', function ($query) {
-                    $query->where('statis','active');
+                    $query->where('status','active');
                 })
                 ->get();
         return view('admin.schedule-posts', compact('posts'));

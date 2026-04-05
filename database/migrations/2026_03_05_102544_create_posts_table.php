@@ -32,7 +32,7 @@ return new class extends Migration
             $table->text('meta_keywords')->nullable();
 
             // Extra Fields
-            $table->string('tags')->nullable();
+            $table->string('blogger_id');
             $table->integer('views')->default(0);
 
             // Status
