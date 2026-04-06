@@ -10,7 +10,7 @@ class Post extends Model
     'title',
     'slug',
     'category_id',
-    'content',
+    'content', 
     'featured_image',
     'meta_title',
     'meta_description',
@@ -26,6 +26,18 @@ class Post extends Model
         return $this->belongsTo(Category::class);
 
     }
+
+    public function tags(){
+        return $this->belongstoMany(tag::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(comment::class) ->whereNull('parent_id')
+                ->where('status','approved')
+                ->with('replies');
+    }
+    
+
     protected $casts = [
     'published_at' => 'datetime',
 ];

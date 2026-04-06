@@ -121,6 +121,25 @@ public function category_updated_store(Request $request, $id)
             'message' => 'Category deleted successfully.'
         ]);
     }
+    public function tag_delete($tag_id)
+    {
+       
+        $tag_id = tag::withCount('posts')->findOrFail($tag_id);
+
+        if ($tag_id->posts_count > 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Cannot Tag Delete. There are posts associated with it.'
+            ]);
+        }
+
+        $tag_id->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Tag deleted successfully.'
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -209,21 +228,7 @@ public function store_updated_post(Request $request, $id)
 {
     $post = Post::findOrFail($id);
 
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'category_id' => 'required|exists:categories,id',
-        'content' => 'required',
-        'featured_image' => 'nullable|mimetypes:image/avif,image/jpeg,image/png,image/webp|max:2048',
-        'meta_title' => 'nullable|string|max:255',
-        'meta_description' => 'nullable|string',
-        'meta_keywords' => 'nullable|string',
-        'tags' => 'nullable|array', // array expected
-        'tags.*' => 'string|max:50', // each tag max 50 char
-        'status' => 'required|in:draft,published,scheduled',
-        'publish_date' => 'nullable|date'
-    ]);
-dd('ok');
-    // 1️⃣ Update slug if title changed
+    // Slug update
     if ($post->title !== $request->title) {
         $slug = Str::slug($request->title);
         if (Post::where('slug', $slug)->where('id', '!=', $id)->exists()) {
@@ -232,42 +237,42 @@ dd('ok');
         $post->slug = $slug;
     }
 
-    // 2️⃣ Update featured image
+    // Image update
     if ($request->hasFile('featured_image')) {
         if ($post->featured_image && file_exists(public_path('post_images/' . $post->featured_image))) {
             unlink(public_path('post_images/' . $post->featured_image));
         }
-        $imageName = time() . '.' . $request->featured_image->extension();
+
+        $imageName = time().'.'.$request->featured_image->extension();
         $request->featured_image->move(public_path('post_images'), $imageName);
         $post->featured_image = $imageName;
     }
 
-    // 3️⃣ Update other fields
-        $post->title = $request->title;
-        $post->category_id = $request->category_id;
-        $post->content = $request->content;
-        $post->meta_title = $request->meta_title;
-        $post->meta_description = $request->meta_description;
-        $post->meta_keywords = $request->meta_keywords;
-        $post->status = $request->status;
-        $post->published_at = $request->publish_date;
+    // Update
+    $post->update([
+        'title' => $request->title,
+        'category_id' => $request->category_id,
+        'content' => $request->content,
+        'meta_title' => $request->meta_title,
+        'meta_description' => $request->meta_description,
+        'meta_keywords' => $request->meta_keywords,
+        'status' => $request->status,
+        'published_at' => $request->publish_date,
+    ]);
 
-    $post->save();
-
-    // 4️⃣ Handle tags (many-to-many)
+    // Tags
+  
     if ($request->has('tags')) {
         $tagIds = [];
-        foreach ($request->tags as $tagName) {
+        foreach (explode(',',$request->tags) as $tagName) {
             $tag = Tag::firstOrCreate(
                 ['slug' => Str::slug($tagName)],
                 ['name' => $tagName]
             );
             $tagIds[] = $tag->id;
         }
-        // Sync tags to pivot table
         $post->tags()->sync($tagIds);
     } else {
-        // If no tags provided, detach all
         $post->tags()->detach();
     }
 
@@ -318,13 +323,17 @@ dd('ok');
     /**
      * Update the specified resource in storage.
      */
-    public function edit($id)
-    {
-       
-      $post = Post::findOrFail($id);
-       $categories = Category::where('status','active')->get();
-      return view('admin.edit-post', compact('post','categories'));
-    }
+  public function edit($id)
+{
+    // Post ke saath category aur tags load karo
+    $post = Post::with('tags')->findOrFail($id);
+   
+
+    // Active categories for dropdown
+    $categories = Category::where('status', 'active')->get();
+
+    return view('admin.edit-post', compact('post','categories'));
+}
 
     /**
      * Remove the specified resource from storage.
@@ -350,7 +359,7 @@ dd('ok');
     }
 
     public function tags_managements(){
-        $categories =  Category::withCount('Posts')->get();
-        return view('admin.tags-management', compact('categories'));
+        $tags =  tag::withCount('Posts')->get();
+        return view('admin.tags-management', compact('tags'));
     }
 }

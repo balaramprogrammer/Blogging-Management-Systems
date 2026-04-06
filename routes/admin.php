@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Admin\BlogController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,9 @@ Route::put('/category/updated_store/{id}',[BlogController::class,'category_updat
 
 //Tags managements
 Route::get('/tags-managements',[BlogController::class,'tags_managements'])->name('tags_managements');
+Route::delete('/tag_delete/{id}', [BlogController::class,'tag_delete'])->name('tag.delete');
+
+//comment routes 
+Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.store');
+Route::get('/comments/{post_id}', [CommentController::class, 'fetch'])->name('comments');
+Route::get('/comments', [CommentController::class, 'comments'])->name('comments');

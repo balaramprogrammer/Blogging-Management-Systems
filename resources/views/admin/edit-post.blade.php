@@ -72,7 +72,8 @@ Swal.fire({
                 <input type="text"
                     name="tags"
                     class="form-control"
-                    value="{{ old('tags', $post->tags) }}"
+                    
+                     value="{{ $post->tags->pluck('name')->implode(', ') }}"
                     placeholder="laravel, php, tutorial">
             </div>
 

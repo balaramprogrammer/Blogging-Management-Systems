@@ -2,7 +2,6 @@
 @section('title')
 404 Page Not Found
 @endsection
-
 @section('content')
 <div class="container py-5">
     <div class="row justify-content-center align-items-center text-center">
@@ -35,7 +34,6 @@
                 <i class="bi bi-journal-text"></i> Read Blogs
             </a>
         </div>
-
     </div>
 </div>
 @endsection

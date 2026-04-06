@@ -12,4 +12,8 @@ class tag extends Model
     'published_at',
     'updated_at'
     ];
+
+    public function posts(){
+        return $this->belongsToMany(Post::class);
+    }
 }
