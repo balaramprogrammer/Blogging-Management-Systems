@@ -17,6 +17,7 @@ class Post extends Model
     'meta_keywords',
     'tags',
     'status',
+    'blogger_id',
     'published_at'
 
     ];

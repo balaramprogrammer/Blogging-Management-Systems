@@ -144,87 +144,73 @@ public function category_updated_store(Request $request, $id)
     /**
      * Store a newly created resource in storage.
      */
-    
     public function store(Request $request)
-    {
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'category_id' => 'required|exists:categories,id',
+        'content' => 'required',
+        'featured_image' => 'nullable|mimetypes:image/avif,image/jpeg,image/png,image/webp|max:2048',
+        'meta_title' => 'nullable|string|max:255',
+        'meta_description' => 'nullable|string',
+        'meta_keywords' => 'nullable|string',
+        'tags' => 'nullable|string', // comma separated
+        'status' => 'required|in:draft,published,scheduled',
+        'publish_date' => 'nullable|date'
+    ]);
 
-        $request->validate([
-
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'content' => 'required',
-
-            'featured_image' => 'nullable|mimetypes:image/avif,image/jpeg,image/png,image/webp|max:2048',
-
-            'meta_title' => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string',
-            'meta_keywords' => 'nullable|string',
-
-            'tags' => 'nullable|string',
-
-            'status' => 'required|in:draft,published,scheduled',
-
-            'publish_date' => 'nullable|date'
-
-        ]);
-
-
-        // slug generate
-        $slug = Str::slug($request->title);
-
-        if(Post::where('slug',$slug)->exists()){
-            $slug = $slug.'-'.time();
-        }
-
-
-        // image upload
-        $imageName = null;
-
-        if ($request->hasFile('featured_image')) {
-
-            $imageName = time().'.'.$request->featured_image->extension();
-
-            $request->featured_image->move(public_path('post_images'), $imageName);
-        }
-
-
-        // status logic
-        // $status = $request->status == 'scheduled' ? 'draft' : $request->status;
-
-        // User se tags array milta hai
-            $tags = $request->tags; // ['AI', 'Laravel', 'PHP']
-
-            foreach ($tags as $tagName) {
-                // Check if tag already exists
-                $tag = Tag::firstOrCreate(
-                    ['slug' => Str::slug($tagName)], // unique key
-                    ['name' => $tagName]             // agar new create kare to name set kare
-                );
-            }
-        Post::create([
-
-            'title' => $request->title,
-            'slug' => $slug,
-            'category_id' => $request->category_id,
-            'content' => $request->content,
-            'featured_image' => $imageName,
-
-            'meta_title' => $request->meta_title,
-            'meta_description' => $request->meta_description,
-            'meta_keywords' => $request->meta_keywords,
-
-            'blogger_id' => 1,
-
-            'status' => $request->status,
-
-            'published_at' => $request->publish_date
-        ]);
-
-        return back()->with('success','Post Added Successfully');
-
+    // slug generate
+    $slug = Str::slug($request->title);
+    if (Post::where('slug', $slug)->exists()) {
+        $slug = $slug . '-' . time();
     }
 
-public function store_updated_post(Request $request, $id)
+    // image upload
+    $imageName = null;
+    if ($request->hasFile('featured_image')) {
+        $imageName = time() . '.' . $request->featured_image->extension();
+        $request->featured_image->move(public_path('post_images'), $imageName);
+    }
+
+    // create post
+    $post = Post::create([
+        'title' => $request->title,
+        'slug' => $slug,
+        'category_id' => $request->category_id,
+        'content' => $request->content,
+        'featured_image' => $imageName,
+        'meta_title' => $request->meta_title,
+        'meta_description' => $request->meta_description,
+        'meta_keywords' => $request->meta_keywords,
+        'blogger_id' => 1,
+        'status' => $request->status,
+        'published_at' => $request->publish_date
+    ]);
+
+    // tags save
+    if ($request->filled('tags')) {
+        $tagIds = [];
+
+        foreach (explode(',', $request->tags) as $tagName) {
+            $tagName = trim($tagName);
+
+            if ($tagName) {
+                $tag = Tag::firstOrCreate(
+                    ['slug' => Str::slug($tagName)],
+                    ['name' => $tagName]
+                );
+                $tagIds[] = $tag->id;
+            }
+        }
+
+        $post->tags()->sync($tagIds);
+    }
+
+    return back()->with('success', 'Post Added Successfully');
+}
+
+
+    public function store_updated_post(Request $request, $id)
 {
     $post = Post::findOrFail($id);
 
